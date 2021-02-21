@@ -5,12 +5,12 @@ The library makes it easy to handle bitbucket webhooks.
 ```php
 use Dbogdanoff\Bitbucket;
 
-// Pull request
+// Pull Request (created, updated, approved, etc ...)
 $bitbucket = new Bitbucket\PullRequest();
 $pullRequest = $bitbucket->getPullRequest();
 $link = $bitbucket->getLink();
 
-// Push/merge/commit
+// Repository (push, update, etc ...)
 $bitbucket = new Bitbucket\Push();
 $changes = $bitbucket->getChanges();
 $branch = $bitbucket->getBranch();
