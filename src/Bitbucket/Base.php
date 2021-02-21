@@ -20,45 +20,42 @@ class Base
      */
     public function __construct()
     {
-        $rawData = json_decode(file_get_contents('php://input'), true);
-
-        if (is_array($rawData)) {
-            $this->rawData = $rawData;
-
-            if (array_key_exists('actor', $this->rawData)) {
-                $this->actor = $this->rawData['actor'];
-            }
-
-            if (array_key_exists('repository', $this->rawData)) {
-                $this->repository = $this->rawData['repository'];
-            }
-        } else {
+        $this->rawData = json_decode(file_get_contents('php://input'), true);
+        if (!is_array($this->rawData)) {
             throw new Exception('Incorrect webhook response');
+        }
+
+        if (array_key_exists('actor', $this->rawData)) {
+            $this->actor = $this->rawData['actor'];
+        }
+
+        if (array_key_exists('repository', $this->rawData)) {
+            $this->repository = $this->rawData['repository'];
         }
     }
 
     public function getRawData(): array
     {
-        return $this->rawData;
+        return (array)$this->rawData;
     }
 
     public function getActor(): array
     {
-        return $this->actor;
+        return (array)$this->actor;
     }
 
     public function getNickName(): string
     {
-        return $this->actor['nickname'];
+        return (string)$this->actor['nickname'];
     }
 
     public function getRepository(): array
     {
-        return $this->repository;
+        return (array)$this->repository;
     }
 
     public function getProjectName(): string
     {
-        return $this->repository['full_name'];
+        return (string)$this->repository['full_name'];
     }
 }

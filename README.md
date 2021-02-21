@@ -5,32 +5,44 @@ The library makes it easy to handle bitbucket webhooks.
 ```php
 use Dbogdanoff\Bitbucket;
 
-// Pull Request (created, updated, approved, etc ...)
-$bitbucket = new Bitbucket\PullRequest();
-$pullRequest = $bitbucket->getPullRequest();
-$link = $bitbucket->getLink();
+// Repository events (Push, Fork, Updated, Commit, ...) 
+$bitbucket = new Bitbucket\Repo();
+$push = $bitbucket->getPush(); // array
+$fork = $bitbucket->getFork(); // array
+$branch = $bitbucket->getBranch(); // string
+$changes = $bitbucket->getChanges(); // array — 'changes' from root or 'changes' key from 'push'
 
-// Repository (push, update, etc ...)
-$bitbucket = new Bitbucket\Push();
-$changes = $bitbucket->getChanges();
-$branch = $bitbucket->getBranch();
+// Issue events (Created, Updated, Comment created)
+$bitbucket = new Bitbucket\Issue();
+$issue = $bitbucket->getIssue(); // array
+
+// Pull request events (Created, Updated, Change, ...)
+$bitbucket = new Bitbucket\PullRequest();
+$pullRequest = $bitbucket->getPullRequest(); // array
+$link = $bitbucket->getLink(); // string — pull request link
 
 // All objects extended from Bitbucket\Base()
-$actor = $bitbucket->getActor();
-$nickname = $bitbucket->getNickName();
-$repository = $bitbucket->getRepository();
-$projectName = $bitbucket->getProjectName();
+$actor = $bitbucket->getActor(); // array
+$nickname = $bitbucket->getNickName(); // string
+$repository = $bitbucket->getRepository(); // array
+$projectName = $bitbucket->getProjectName(); // string
+$rawData = $bitbucket->getRawData(); // array — full data
 ```
 
 ### Exceptions
 ```php
-// Bitbucket\PullRequest()
-if ($_SERVER['HTTP_X_EVENT_KEY'] !== 'pullrequest:created') {
+// Bitbucket\Repo::__construct()
+if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'repo:') === false) {
     throw new Exception('Invalid request type');
 }
 
-// Bitbucket\Push()
-if ($_SERVER['HTTP_X_EVENT_KEY'] !== 'repo:push') {
+// Bitbucket\Issue::__construct()
+if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'issue:') === false) {
+    throw new Exception('Invalid request type');
+}
+
+// Bitbucket\PullRequest::__construct()
+if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'pullrequest:') === false) {
     throw new Exception('Invalid request type');
 }
 ```
