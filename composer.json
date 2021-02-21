@@ -1,0 +1,15 @@
+{
+  "name": "denx-b/bitbucket-webhook",
+  "type": "library",
+  "description": "Simple webhook handling bitbucket",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dbogdanoff\\": "src/"
+    }
+  }
+}
