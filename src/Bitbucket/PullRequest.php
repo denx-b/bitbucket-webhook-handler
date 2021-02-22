@@ -39,4 +39,9 @@ class PullRequest extends Base
     {
         return $this->pullRequest['links']['html']['href'];
     }
+
+    public function getTitle(): string
+    {
+        return $this->pullRequest['title'] ?: '';
+    }
 }
