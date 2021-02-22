@@ -46,7 +46,7 @@ class Repo extends Base
     public function getChanges(): array
     {
         if (array_key_exists('changes', $this->push)) {
-            return $this->push['changes'][0]['old'] ?: $this->push['changes'][0]['new'];
+            return $this->push['changes'][0]['new'] ?: $this->push['changes'][0]['old'];
         } else if (array_key_exists('changes', $this->rawData)) {
             return $this->rawData['changes'];
         }
