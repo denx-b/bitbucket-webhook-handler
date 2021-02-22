@@ -15,6 +15,9 @@ class Base
     /** @var array user who triggered the event */
     protected $actor = [];
 
+    /** @var string webhook type */
+    protected $eventKey = '';
+
     /**
      * @throws Exception
      */
@@ -25,37 +28,44 @@ class Base
             throw new Exception('Incorrect webhook response');
         }
 
-        if (array_key_exists('actor', $this->rawData)) {
+        if (array_key_exists('actor', $this->rawData) && is_array($this->rawData['actor'])) {
             $this->actor = $this->rawData['actor'];
         }
 
-        if (array_key_exists('repository', $this->rawData)) {
+        if (array_key_exists('repository', $this->rawData) && is_array($this->rawData['repository'])) {
             $this->repository = $this->rawData['repository'];
         }
+
+        $this->eventKey = $_SERVER['HTTP_X_EVENT_KEY'];
     }
 
     public function getRawData(): array
     {
-        return (array)$this->rawData;
+        return $this->rawData;
     }
 
     public function getActor(): array
     {
-        return (array)$this->actor;
+        return $this->actor;
     }
 
     public function getNickName(): string
     {
-        return (string)$this->actor['nickname'];
+        return $this->actor['nickname'];
     }
 
     public function getRepository(): array
     {
-        return (array)$this->repository;
+        return $this->repository;
     }
 
     public function getProjectName(): string
     {
-        return (string)$this->repository['full_name'];
+        return $this->repository['full_name'];
+    }
+
+    public function getEventKey(): string
+    {
+        return $this->eventKey;
     }
 }

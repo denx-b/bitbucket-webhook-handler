@@ -18,7 +18,7 @@ class Repo extends Base
      */
     public function __construct()
     {
-        if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'repo:') === false) {
+        if (strpos($this->eventKey, 'repo:') === false) {
             throw new Exception('Invalid request type');
         }
 

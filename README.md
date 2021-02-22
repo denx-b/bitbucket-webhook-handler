@@ -6,27 +6,29 @@ The library makes it easy to handle [bitbucket webhooks](https://support.atlassi
 use Dbogdanoff\Bitbucket;
 
 // Repository events (Push, Fork, Updated, Commit, ...) 
-$bitbucket = new Bitbucket\Repo();
-$push = $bitbucket->getPush(); // array
-$fork = $bitbucket->getFork(); // array
-$branch = $bitbucket->getBranch(); // string
-$changes = $bitbucket->getChanges(); // array — 'changes' from root or 'changes' key from 'push'
+$repo = new Bitbucket\Repo();
+$push = $repo->getPush(); // array
+$fork = $repo->getFork(); // array
+$branch = $repo->getBranch(); // string
+$changes = $repo->getChanges(); // array — 'changes' from root or 'changes' key from 'push'
 
 // Issue events (Created, Updated, Comment created)
-$bitbucket = new Bitbucket\Issue();
-$issue = $bitbucket->getIssue(); // array
+$issue = new Bitbucket\Issue();
+$issue = $issue->getIssue(); // array
 
 // Pull request events (Created, Updated, Change, ...)
-$bitbucket = new Bitbucket\PullRequest();
-$pullRequest = $bitbucket->getPullRequest(); // array
-$link = $bitbucket->getLink(); // string — pull request link
+$pullRequest = new Bitbucket\PullRequest();
+$title = $pullRequest->getTitle(); // string
+$link = $pullRequest->getLink(); // string
+$data = $pullRequest->getPullRequest(); // array
 
 // All objects extended from Bitbucket\Base()
-$actor = $bitbucket->getActor(); // array
-$nickname = $bitbucket->getNickName(); // string
-$repository = $bitbucket->getRepository(); // array
-$projectName = $bitbucket->getProjectName(); // string
-$rawData = $bitbucket->getRawData(); // array — full data
+$actor = $repo->getActor(); // array
+$nickname = $repo->getNickName(); // string
+$repository = $repo->getRepository(); // array
+$projectName = $repo->getProjectName(); // string
+$eventType = $repo->getEventKey(); // string — repo:push, repo:updated, pullrequest:created, ...
+$rawData = $repo->getRawData(); // array — full data
 ```
 
 ### Exceptions
@@ -85,4 +87,3 @@ https://support.atlassian.com/bitbucket-cloud/docs/manage-webhooks/
 ## Events
 
 https://support.atlassian.com/bitbucket-cloud/docs/event-payloads/
-

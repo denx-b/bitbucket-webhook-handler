@@ -14,7 +14,7 @@ class Issue extends Base
      */
     public function __construct()
     {
-        if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'issue:') === false) {
+        if (strpos($this->eventKey, 'issue:') === false) {
             throw new Exception('Invalid request type');
         }
 

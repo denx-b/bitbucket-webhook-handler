@@ -14,7 +14,7 @@ class PullRequest extends Base
      */
     public function __construct()
     {
-        if (strpos($_SERVER['HTTP_X_EVENT_KEY'], 'pullrequest:') === false) {
+        if (strpos($this->eventKey, 'pullrequest:') === false) {
             throw new Exception('Invalid request type');
         }
 
