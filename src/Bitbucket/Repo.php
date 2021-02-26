@@ -9,8 +9,10 @@ class Repo extends Base
     /** @var array */
     protected $push = [];
 
+    /** @var array */
     protected $fork = [];
 
+    /** @var array */
     protected $changes = [];
 
     /**
