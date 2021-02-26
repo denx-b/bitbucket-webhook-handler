@@ -54,6 +54,20 @@ class Repo extends Base
         return $this->changes;
     }
 
+    public function getCommits(): array
+    {
+        return $this->getPush()['changes'][0]['commits'];
+    }
+
+    public function getCommitComments(): array
+    {
+        $commits = [];
+        foreach ($this->getCommits() as $commit) {
+            $commits[$commit['hash']] = $commit['message'];
+        }
+        return $commits;
+    }
+
     public function getBranch(): string
     {
         $changes = $this->getChanges();
