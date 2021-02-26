@@ -44,4 +44,9 @@ class PullRequest extends Base
     {
         return $this->pullRequest['title'] ?: '';
     }
+
+    public function getAuthor(): array
+    {
+        return $this->getPullRequest()['author'];
+    }
 }

@@ -63,4 +63,9 @@ class Repo extends Base
 
         return '';
     }
+
+    public function getAuthor(): array
+    {
+        return $this->getChanges()['target']['author'];
+    }
 }
