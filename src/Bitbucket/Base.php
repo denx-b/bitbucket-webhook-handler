@@ -49,9 +49,9 @@ class Base
         return $this->actor;
     }
 
-    public function getAuthor(): array
+    public function getNickName(): string
     {
-        return [];
+        return $this->actor['nickname'];
     }
 
     public function getRepository(): array
@@ -67,5 +67,15 @@ class Base
     public function getEventKey(): string
     {
         return $this->eventKey;
+    }
+
+    public function getAuthor(): array
+    {
+        return [];
+    }
+
+    public function getAuthorNickName(): string
+    {
+        return '';
     }
 }
