@@ -84,4 +84,9 @@ class Repo extends Base
     {
         return $this->getChanges()['target']['author'];
     }
+
+    public function getAuthorNickName(): string
+    {
+        return $this->getAuthor()['user']['nickname'];
+    }
 }
