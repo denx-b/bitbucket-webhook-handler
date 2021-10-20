@@ -11,6 +11,7 @@ $push = $repo->getPush(); // array
 $fork = $repo->getFork(); // array
 $branch = $repo->getBranch(); // string
 $changes = $repo->getChanges(); // array — 'changes' from root or 'changes' key from 'push'
+$authorNickName = $repo->getAuthorNickName(); // string
 
 // Issue events (Created, Updated, Comment created)
 $issue = new Bitbucket\Issue();
@@ -21,6 +22,11 @@ $pullRequest = new Bitbucket\PullRequest();
 $title = $pullRequest->getTitle(); // string
 $link = $pullRequest->getLink(); // string
 $data = $pullRequest->getPullRequest(); // array
+$author = $pullRequest->getAuthor(); // array
+$authorNickName = $pullRequest->getAuthorNickName(); // string
+$commentText = $pullRequest->getCommentText(); // string
+$commentInlinePath = $pullRequest->getCommentInlinePath(); // string
+$commentInlineNumber = $pullRequest->getCommentInlineNumber(); // string
 
 // All objects extended from Bitbucket\Base()
 $actor = $repo->getActor(); // array
